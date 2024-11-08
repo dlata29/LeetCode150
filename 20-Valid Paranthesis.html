@@ -8,18 +8,34 @@
   <body>
     <div class="text"></div>
     <script>
-      const str = "() [] {}";
+      const str = "()";
       const obj = {};
       const res = [];
 
       obj["{"] = "}";
       obj["["] = "]";
       obj["("] = ")";
-
+      obj["}"] = "{}";
+      obj["]"] = "[";
+      obj[")"] = "(";
       var isValid = function (str) {
         const nums = str.replace(/\s+/g, "").split("");
 
-        for (let i = 0; i < nums.length; i++) {}
+        for (let i = 0; i < nums.length; i++) {
+          if (
+            res.includes(obj[nums[i]]) &&
+            res.indexOf(obj[nums[i]]) === res.length - 1
+          ) {
+            res.pop(res.length - 1);
+            break;
+          }
+          res.push(nums[i]);
+        }
+
+        if (res.length === 0) {
+          return true;
+        }
+        return false;
       };
 
       document.querySelector(".text").innerHTML = isValid(str);
