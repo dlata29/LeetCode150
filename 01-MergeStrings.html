@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * @param {string} word1
+       * @param {string} word2
+       * @return {string}
+       */
+      var mergeAlternately = function (word1, word2) {
+        let ans = "";
+        let maxLength = Math.max(word1.length, word2.length);
+
+        for (let i = 0; i < maxLength; i++) {
+          if (i < word1.length) {
+            ans += word1[i];
+          }
+          if (i < word2.length) {
+            ans += word2[i];
+          }
+        }
+
+        return ans;
+      };
+    </script>
+  </body>
+</html>
