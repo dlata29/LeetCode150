@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var gcdOfStrings = function (str1, str2) {
+        if (str1 + str2 !== str2 + str1) return "";
+        let a = str1.length;
+        let b = str2.length;
+
+        // loop (divide) until you find the
+        // highest common factor (length of string)
+        // like we did in maths
+        while (b) {
+          let temp = b;
+          b = a % b;
+          a = temp;
+        }
+        return str1.substring(0, a);
+      };
+      console.log(
+        gcdOfStrings(
+          "TAUXXTAUXXTAUXXTAUXXTAUXX",
+          "TAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXXTAUXX"
+        )
+      );
+    </script>
+  </body>
+</html>
