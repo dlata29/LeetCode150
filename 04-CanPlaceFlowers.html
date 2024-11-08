@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var canPlaceFlowers = function (flowerbed, n) {
+        let ones = flowerbed.reduce(
+          (acc, curr) => (acc = curr == 0 ? acc + 1 : acc + 0),
+          0
+        );
+
+        const adjacent = [];
+
+        if (ones > (flowerbed.length - 1) / 2) return false;
+        else {
+          flowerbed.map((_, i) => {
+            if (i > 0) adjacent.push(arr[i - 1]); // Previous element
+            if (i < arr.length - 1) adjacent.push(arr[i + 1]); // Next element
+            console.log(adjacent.join(" "));
+          });
+        }
+        console.log(ones);
+      };
+      console.log(canPlaceFlowers([1, 0, 0, 0, 1], 2));
+    </script>
+  </body>
+</html>
