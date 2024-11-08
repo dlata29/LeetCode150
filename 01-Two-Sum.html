@@ -6,6 +6,29 @@
     <title>Document</title>
   </head>
   <body>
-    <script></script>
+    <p class="text"></p>
+    <script>
+      const nums = [1, 2, 3, 4, 5];
+      const target = 7;
+
+      function calC(nums, target) {
+        let obj = {};
+
+        for (let i = 0; i < nums.length; i++) {
+          let leftOver = target - nums[i];
+
+          // Check if leftOver is already in the object
+          if (obj.hasOwnProperty(leftOver)) {
+            return [obj[leftOver], i];
+          }
+
+          // Add the current element and index to the object
+          obj[nums[i]] = i;
+        }
+        return []; // Return empty array if no solution found
+      }
+      console.log(calC(nums, target));
+      document.querySelector(".text").innerHTML = calC(nums, target);
+    </script>
   </body>
 </html>
