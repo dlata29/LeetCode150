@@ -9,23 +9,36 @@
     <script>
       var canPlaceFlowers = function (flowerbed, n) {
         let ones = flowerbed.reduce(
-          (acc, curr) => (acc = curr == 0 ? acc + 1 : acc + 0),
+          (acc, curr) => (curr === 1 ? acc + 1 : acc + 0),
           0
         );
 
-        const adjacent = [];
-
-        if (ones > (flowerbed.length - 1) / 2) return false;
+        if (ones >= n) return false;
         else {
           flowerbed.map((_, i) => {
-            if (i > 0) adjacent.push(arr[i - 1]); // Previous element
-            if (i < arr.length - 1) adjacent.push(arr[i + 1]); // Next element
-            console.log(adjacent.join(" "));
+            if (i > 0 && flowerbed[i] != 1 && n > 0) {
+              if (
+                (flowerbed[i - 1] == 1 && flowerbed[i + 1] == 0) ||
+                (flowerbed[i - 1] == 0 && flowerbed[i + 1] == 0) ||
+                (flowerbed[i - 1] == 0 && flowerbed[i + 1] == 1)
+              ) {
+                flowerbed[i + 1] = 1;
+                n--;
+
+                // Previous element
+              }
+            }
+            if ((i = 0 && n > 0)) {
+              if (flowerbed[i] == 0 && flowerbed[i + 1] == 0) {
+                flowerbed[i + 1] = 1;
+                n--;
+              }
+            }
           });
         }
-        console.log(ones);
+        return n == 0;
       };
-      console.log(canPlaceFlowers([1, 0, 0, 0, 1], 2));
+      console.log(canPlaceFlowers([1, 0, 0, 0, 0, 1], 2));
     </script>
   </body>
 </html>
