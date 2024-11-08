@@ -12,20 +12,17 @@
       const target = 7;
 
       function calC(nums, target) {
-        let obj = {};
+        let myMap = new Map();
 
         for (let i = 0; i < nums.length; i++) {
           let leftOver = target - nums[i];
 
-          // Check if leftOver is already in the object
-          if (obj.hasOwnProperty(leftOver)) {
-            return [obj[leftOver], i];
+          if (myMap.has(leftOver)) {
+            return [myMap.get(leftOver), i]; // Return the indices of the pair
           }
-
-          // Add the current element and index to the object
-          obj[nums[i]] = i;
+          myMap.set(nums[i], i);
         }
-        return []; // Return empty array if no solution found
+        return [];
       }
       console.log(calC(nums, target));
       document.querySelector(".text").innerHTML = calC(nums, target);
