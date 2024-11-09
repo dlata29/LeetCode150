@@ -9,22 +9,26 @@
     <div id="demo"></div>
     <script>
       var productExceptSelf = function (nums) {
-        let result = [];
+        const n = nums.length;
+        const output = new Array(n).fill(1);
 
-        for (i = 0; i < nums.length; i++) {
-          let newAr = [...nums];
-          newAr.splice(i, 1);
-          result.push(newAr.reduce((acc, ele) => ele * acc, 1));
+        for (let i = 1; i < n; i++) {
+          output[i] = output[i - 1] * nums[i - 1];
         }
 
-        result = result.map((ele) => (Math.abs(ele) === 0 ? 0 : ele));
-        return result;
+        let rightmost = nums[n - 1];
+        for (let i = n - 2; i >= 0; i--) {
+          output[i] *= rightmost;
+          rightmost *= nums[i];
+        }
+
+        return output;
       };
 
       // document.getElementById("demo").innerHTML = productExceptSelf([
       //   1, 2, 3, 4,
       // ]);
-      console.log(productExceptSelf([-1, 1, 0, -3, 3]));
+      console.log(productExceptSelf([1, 2, 3, 4]));
     </script>
   </body>
 </html>
