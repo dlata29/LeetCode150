@@ -11,16 +11,18 @@
         let min = Number.MAX_SAFE_INTEGER;
         let secondMin = Number.MAX_SAFE_INTEGER;
 
-        let count = 1;
+        let result = [];
 
-        for (let i = 0; i < nums.length - 1; i++) {
-          if (nums[i] < nums[i + 1]) {
-            secondMin = min;
-            min = nums[i];
-            count++;
+        for (let i = 0; i < nums.length; i++) {
+          let newArray = nums.slice(i + 1); // Slice from index i (inclusive) to the end
+
+          let smallest = Math.min(...newArray); // Find the smallest number
+
+          if (nums[i] < smallest) {
+            result.push(i);
           }
         }
-        return count >= 3;
+        return result.length >= 3;
       };
       console.log(increasingTriplet([2, 1, 5, 0, 4, 6]));
     </script>
