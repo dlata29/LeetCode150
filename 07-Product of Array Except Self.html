@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="demo"></div>
+    <script>
+      var productExceptSelf = function (nums) {
+        let result = [];
+
+        for (i = 0; i < nums.length; i++) {
+          let newAr = [...nums];
+          newAr.splice(i, 1);
+          result.push(newAr.reduce((acc, ele) => ele * acc, 1));
+        }
+
+        result = result.map((ele) => (Math.abs(ele) === 0 ? 0 : ele));
+        return result;
+      };
+
+      // document.getElementById("demo").innerHTML = productExceptSelf([
+      //   1, 2, 3, 4,
+      // ]);
+      console.log(productExceptSelf([-1, 1, 0, -3, 3]));
+    </script>
+  </body>
+</html>
