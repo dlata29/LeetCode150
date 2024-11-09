@@ -8,21 +8,29 @@
   <body>
     <script>
       var reverseVowels = function (s) {
-        let vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
-        let a = s.split("");
-        let i = 0;
-        let temp;
-        let j = a.length - 1;
+        const chars = s.split("");
 
-        while (i < j) {
-          if (vowels.includes(a[i]) && vowels.includes(a[j])) {
-            temp = a[i];
-            a[i] = a[j];
-            a[j] = temp;
-            i++;
-            j--;
-          } else if (!vowels.includes(a[i])) i++;
-          else if (!vowels.includes(a[j])) j--;
+        let start = 0,
+          end = chars.length - 1;
+        let vowels = "aeiouAEIOU";
+
+        while (start < end) {
+          // move start pointer until it points to a vowel
+          while (start < end && vowels.indexOf(chars[start]) === -1) {
+            start++;
+          }
+          // move end pinter until it points to a vowel
+          while (start < end && vowels.indexOf(chars[end]) === -1) {
+            end--;
+          }
+
+          // swap the vowels and move pointers
+          const temp = chars[start];
+          chars[start] = chars[end];
+          chars[end] = temp;
+
+          start++;
+          end--;
         }
         return a.join("");
       };
