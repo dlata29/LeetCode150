@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charsset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
     <script>
-      var increasingTriplet = function (nums) {
-        let min = Number.MAX_SAFE_INTEGER;
-        let secondMin = Number.MAX_SAFE_INTEGER;
+      var compress = function (chars) {
+        let res = [];
+        let count = 1; // Initialize count to 1 since each character appears at least once
 
-        let result = [];
+        for (i = 0; i < chars.length; i++) {
+          if (chars[i] !== chars[i + 1] && count == 1) {
+            res.push(chars[i]);
+            continue;
+          }
 
-        for (let i = 0; i < nums.length; i++) {
-          let newArray = nums.slice(i + 1); // Slice from index i (inclusive) to the end
-
-          let smallest = Math.min(...newArray); // Find the smallest number
-
-          if (nums[i] < smallest) {
-            result.push(i);
+          if (chars[i] === chars[i + 1]) {
+            count++;
+          } else {
+            res.push(chars[i]);
+            res.push(count);
+            count = 1;
           }
         }
-        return result.length >= 3;
+        return res.join("").split("");
       };
-      console.log(increasingTriplet([2, 1, 5, 0, 4, 6]));
+
+      console.log(compress(["a", "a", "b", "b", "c", "c", "c"]));
     </script>
   </body>
 </html>
