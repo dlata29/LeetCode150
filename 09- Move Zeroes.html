@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var moveZeroes = function (nums) {
+        let i,
+          j = 0;
+        let n = nums.length;
+
+        // for (i = 0; i < n; i++) {
+        //   if (nums[i] == 0) {
+        //     for (j = i + 1; j < n; j++) {
+        //       if (nums[j] !== 0) {
+        //         let temp = nums[i];
+        //         nums[i] = nums[j];
+        //         nums[j] = temp;
+        //         break;
+        //       }
+        //     }
+        //   }
+        // }
+
+        let c = 0;
+
+        for (let i = 0; i < nums.length; i++) {
+          if (nums[i] !== 0) {
+            if (i !== c) {
+              let temp = nums[i];
+              nums[i] = nums[c];
+              nums[c] = temp;
+            }
+            c++;
+          }
+        }
+        return nums;
+      };
+
+      console.log(moveZeroes([1, 0, 2, 0, 3]));
+    </script>
+  </body>
+</html>

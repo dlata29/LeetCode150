@@ -28,7 +28,17 @@
         return res.join("").split("");
       };
 
-      console.log(compress(["a", "a", "b", "b", "c", "c", "c"]));
+      // console.log(compress(["a", "a", "b", "b", "c", "c", "c"]));
+
+      var maxProfit = function (prices) {
+        let min = Math.min(...prices);
+        let indexOfMin = prices.indexOf(min);
+        let newArr = prices.slice(indexOfMin);
+
+        return Math.max(...newArr) - min || 0;
+      };
+
+      console.log(maxProfit([7, 6, 4, 3, 1]));
     </script>
   </body>
 </html>
