@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var isSubsequence = function (s, t) {
+        let sub = s.split("");
+        let main = t.split("");
+        let result = [];
+        let jStartIndex = 0;
+        sub.forEach((element) => {
+          for (let j = jStartIndex; j < main.length; j++) {
+            if (main[j] == element) {
+              result.push(j);
+              jStartIndex = j + 1;
+              break;
+            }
+          }
+        });
+
+        return result.sort() === result && result.length === sub.length;
+      };
+      console.log(isSubsequence("ab", "baab"));
+    </script>
+  </body>
+</html>
