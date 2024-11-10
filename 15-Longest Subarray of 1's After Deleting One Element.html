@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var longestSubarray = function (nums) {
+        let left = 0;
+        let max = 0;
+        let zeroCount = 0; // Keeps track of the number of zeroes in the window
+        let k = 1;
+        for (let right = 0; right < nums.length; right++) {
+          // Count the number of zeros in the window
+          if (nums[right] === 0) {
+            zeroCount++;
+          }
+
+          // If zeroCount exceeds k, shrink the window from the left
+          while (zeroCount > k) {
+            if (nums[left] === 0) {
+              zeroCount--;
+            }
+            left++;
+          }
+
+          // Update the maximum length of the window
+          max = Math.max(max, right - left);
+        }
+
+        return max;
+      };
+      console.log(longestSubarray([1, 1, 0, 1]));
+    </script>
+  </body>
+</html>

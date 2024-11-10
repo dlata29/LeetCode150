@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var maxVowels = function (s, k) {
+        let res = 0;
+        let maxVowels = 0;
+        let left = 0;
+        let arr = s.toLowerCase().split(""); // Convert to lowercase once.
+
+        const vowelsSet = new Set(["a", "e", "i", "o", "u"]);
+
+        // Count vowels in the first window of size k
+        for (let i = 0; i < k; i++) {
+          if (vowelsSet.has(arr[i])) {
+            res++;
+          }
+        }
+        maxVowels = res; // Store initial window's vowel count
+
+        // Sliding window approach
+        for (let right = k; right < arr.length; right++) {
+          // If the new character entering the window (right) is a vowel
+          if (vowelsSet.has(arr[right])) {
+            res++;
+          }
+
+          // If the character leaving the window (left) is a vowel
+          if (vowelsSet.has(arr[left])) {
+            res--;
+          }
+
+          // Update the maxVowels count
+          maxVowels = Math.max(maxVowels, res);
+
+          // Move the left pointer to slide the window
+          left++;
+        }
+
+        return maxVowels;
+      };
+
+      console.log(maxVowels("leetcode", 3));
+    </script>
+  </body>
+</html>

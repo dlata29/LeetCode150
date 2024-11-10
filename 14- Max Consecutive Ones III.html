@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var longestOnes = function (nums, k) {
+        let first0 = nums.findIndex((ele) => ele === 0);
+
+        let left = 0;
+        let right = 0;
+
+        if (k >= nums.length) return k;
+
+        let count = k;
+        let max = 0;
+        while (right < nums.length) {
+          let Slength = 0;
+          for (let i = right; i < nums.length; i++) {
+            if (nums[i] == 1) {
+              Slength += 1;
+            }
+
+            if (nums[i] == 0 && count > 0) {
+              count--;
+              Slength++;
+            }
+
+            if (nums[i + 1] != 1 && count == 0) {
+              max = Math.max(max, Slength);
+              break;
+            }
+          }
+          right++;
+          count = k;
+        }
+
+        return max;
+      };
+
+      console.log(
+        longestOnes(
+          [0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1],
+          3
+        )
+      );
+    </script>
+  </body>
+</html>
