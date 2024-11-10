@@ -6,6 +6,47 @@
     <title>Document</title>
   </head>
   <body>
-    <script></script>
+    <script>
+      var maxArea = function (height) {
+        let max = 0;
+        for (let i = 0; i < height.length; i++) {
+          let x = i + 1;
+          let y = height[i];
+          for (j = i + 1; j < height.length; j++) {
+            let nowheight = Math.min(height[i], height[j]);
+            let diff = j - i;
+            console.table(
+              `x=${x}, y=${y}, curr=${j}, diff=${diff}, minheight= ${nowheight}, product=${
+                diff * nowheight
+              }`
+            );
+            diff * nowheight > max ? (max = diff * nowheight) : max;
+          }
+          console.log("");
+        }
+        return max;
+        // let max = 0;
+        // let left = 0;
+        // let right = height.length - 1;
+        // // Two-pointer approach to minimize unnecessary comparisons
+        // while (left < right) {
+        //   // Calculate the width between the two pointers
+        //   const width = right - left;
+        //   // Find the minimum height
+        //   const minHeight = Math.min(height[left], height[right]);
+        //   // Calculate the area
+        //   max = Math.max(max, width * minHeight);
+        //   // Move the pointer corresponding to the shorter line inward
+        //   if (height[left] < height[right]) {
+        //     left++;
+        //   } else {
+        //     right--;
+        //   }
+        // }
+        // return max;
+      };
+
+      console.log(maxArea([1, 2, 3, 4, 8, 2, 1]));
+    </script>
   </body>
 </html>
