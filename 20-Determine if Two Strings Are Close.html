@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var closeStrings = function (word1, word2) {
+        let w1 = word1.split("");
+        let w2 = word2.split("");
+        let s1 = [...new Set(word1.split(""))];
+        let s2 = [...new Set(word2.split(""))];
+
+        let c1 = [];
+        let c2 = [];
+
+        if (word1.length != word2.length) return false;
+        if (!s1.every((ele) => new Set([...s2]).has(ele))) {
+          return false;
+        }
+
+        const findCount = (arr, ele) => {
+          return arr.filter((x) => x === ele).length;
+        };
+        s1.forEach((ele) => {
+          c1.push(findCount(w1, ele));
+        });
+        s2.forEach((ele) => {
+          c2.push(findCount(w2, ele));
+        });
+
+        c1 = c1.sort((a, b) => a - b);
+        c2 = c2.sort((a, b) => a - b);
+
+        return JSON.stringify(c1) === JSON.stringify(c2);
+      };
+
+      console.log(closeStrings("uau", "ssx"));
+    </script>
+  </body>
+</html>
