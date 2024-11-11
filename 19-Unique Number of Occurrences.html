@@ -5,5 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <script>
+      var uniqueOccurrences = function (arr) {
+        let unique = [...new Set(arr)];
+        let result = [];
+
+        unique.forEach((ele) => {
+          result.push(arr.filter((item) => item === ele).length);
+        });
+
+        return [...new Set(result)].length === unique.length;
+      };
+
+      console.log(uniqueOccurrences([1, 2, 2, 1, 1, 3]));
+    </script>
+  </body>
 </html>
