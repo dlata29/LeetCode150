@@ -7,7 +7,23 @@
   </head>
   <body>
     <script>
-      var findDifference = function (nums1, nums2) {};
+      var findDifference = function (nums1, nums2) {
+        let uniqueToArr1 = new Set(
+          nums1.filter((item) => !nums2.includes(item))
+        );
+
+        // Elements unique to arr2
+        let uniqueToArr2 = new Set(
+          nums2.filter((item) => !nums1.includes(item))
+        );
+
+        // Result as nested array
+        let result = [uniqueToArr1, uniqueToArr2];
+
+        return result;
+      };
+
+      console.log(findDifference([1, 2, 3, 3], [1, 1, 2, 2]));
     </script>
   </body>
 </html>
