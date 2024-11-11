@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var largestAltitude = function (gain) {
+        let a = [];
+        a.push(0);
+        for (i = 0; i < gain.length; i++) {
+          a[i + 1] = a[i] + gain[i];
+        }
+
+        return Math.max(...a);
+      };
+      console.log(largestAltitude([-4, -3, -2, -1, 4, 3, 2]));
+    </script>
+  </body>
+</html>
