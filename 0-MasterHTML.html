@@ -7,36 +7,29 @@
   </head>
   <body>
     <script>
-      var decodeString = function (s) {
+      var asteroidCollision = function (asteroids) {
+        let z = [...asteroids];
         let stack = [];
-        let currentString = "";
-        let currentNumber = 0;
+        stack.push(z[0]);
 
-        for (let char of s) {
-          if (!isNaN(char)) {
-            // Build the number
-            currentNumber = currentNumber * 10 + parseInt(char);
-          } else if (char === "[") {
-            // Push the current state to the stack
-            stack.push([currentString, currentNumber]);
-            // Reset current values
-            currentString = "";
-            currentNumber = 0;
-          } else if (char === "]") {
-            // Pop from the stack
-            let [previousString, multiplier] = stack.pop();
-            // Repeat the current string and concatenate
-            currentString = previousString + currentString.repeat(multiplier);
+        for (i = 1; i < z.length; i++) {
+          if (stack[i - 1] < 0) {
+            stack.push(z[i]);
+          } else if ((z[i] < 0 && z[i - 1] < 0) || (z[i] > 0 && z[i - 1] > 0)) {
+            stack.push(z[i]);
           } else {
-            // Add characters to the current string
-            currentString += char;
+            let curr = asteroids[i];
+            let ele = asteroids[i - 1];
+            stack.pop();
+            if (curr + ele != 0) {
+              stack.push(Math.abs(curr) > Math.abs(ele) ? curr : ele);
+            }
           }
         }
-
-        return currentString;
+        return stack;
       };
 
-      console.log(decodeString("3[a2[c]]"));
+      console.log(asteroidCollision([10, 2, -5]));
     </script>
   </body>
 </html>
