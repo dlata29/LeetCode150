@@ -11,16 +11,31 @@
         let stack = [];
         let currentString = "";
         let currentNumber = 0;
-         let a=s.split("");
-        for (i=0;i<a.length;i++) {
-          if(! a[i] === NaN){
-            currentNumber=currentNumber*0 +a[i];
+        let a = s.split("");
+        let tempString = "";
+        for (i = 0; i < a.length; i++) {
+          if (!a[i] === NaN) {
+            currentNumber = currentNumber * 0 + a[i];
+          }
+          if (a[i] == "[") {
+            stack.push(currentNumber);
+            stack.push("[");
+            currentNumber = 0;
+          }
+          if (/^[a-zA-Z]$/.test(a[i])) {
+            tempString += a[i];
+          }
+          if (a[i] == "]") {
+            currentString = tempString.repeat(stack[stack.length - 1]);
+            tempString = "";
+            stack.pop();
           }
 
-        return currentString;
+          return currentString;
+        }
       };
 
-      console.log(decodeString("3[a2[bc]]"))
+      console.log(decodeString("3[a2[bc]]"));
     </script>
   </body>
 </html>
