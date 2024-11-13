@@ -11,9 +11,11 @@
         let stack = [];
         let currentString = "";
         let currentNumber = 0;
-
-        for (let char of s) {
-
+         let a=s.split("");
+        for (i=0;i<a.length;i++) {
+          if(! a[i] === NaN){
+            currentNumber=currentNumber*0 +a[i];
+          }
 
         return currentString;
       };
