@@ -12,18 +12,21 @@
         let stack = [];
         stack.push(z[0]);
 
+        let initialDir = stack[0] > 0 ? "right" : "left";
         for (i = 1; i < z.length; i++) {
-          if (stack[i - 1] < 0) {
+          let curDir = z[i] > 0 ? "right" : "left";
+          let lastDir = z[i - 1] > 0 ? "right" : "left";
+          if (curDir === lastDir) {
             stack.push(z[i]);
-          } else if ((z[i] < 0 && z[i - 1] < 0) || (z[i] > 0 && z[i - 1] > 0)) {
-            stack.push(z[i]);
-          } else {
-            let curr = asteroids[i];
-            let ele = asteroids[i - 1];
+            // stack.push("right");
+          } else if (curDir != lastDir) {
+            let curr = z[i];
+            let prevele = z[i - 1];
             stack.pop();
-            if (curr + ele != 0) {
-              stack.push(Math.abs(curr) > Math.abs(ele) ? curr : ele);
-            }
+            stack.push(Math.abs(curr) > Math.abs(prevele) ? curr : ele);
+            i--;
+          } else if (initialDir === "left") {
+            stack.push(z[i]);
           }
         }
         return stack;
