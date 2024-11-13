@@ -7,32 +7,18 @@
   </head>
   <body>
     <script>
-      var asteroidCollision = function (asteroids) {
-        let z = [...asteroids];
+      var decodeString = function (s) {
         let stack = [];
-        stack.push(z[0]);
+        let currentString = "";
+        let currentNumber = 0;
 
-        let initialDir = stack[0] > 0 ? "right" : "left";
-        for (i = 1; i < z.length; i++) {
-          let curDir = z[i] > 0 ? "right" : "left";
-          let lastDir = z[i - 1] > 0 ? "right" : "left";
-          if (curDir === lastDir) {
-            stack.push(z[i]);
-            // stack.push("right");
-          } else if (curDir != lastDir) {
-            let curr = z[i];
-            let prevele = z[i - 1];
-            stack.pop();
-            stack.push(Math.abs(curr) > Math.abs(prevele) ? curr : ele);
-            i--;
-          } else if (initialDir === "left") {
-            stack.push(z[i]);
-          }
-        }
-        return stack;
+        for (let char of s) {
+
+
+        return currentString;
       };
 
-      console.log(asteroidCollision([10, 2, -5]));
+      console.log(decodeString("3[a2[bc]]"))
     </script>
   </body>
 </html>
