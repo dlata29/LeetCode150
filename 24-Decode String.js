@@ -2,27 +2,25 @@ var decodeString = function (s) {
   let stack = [];
   let currentString = "";
   let currentNumber = 0;
+  let a = s.split("");
 
-  for (let char of s) {
-    if (!isNaN(char)) {
-      // Build the number
-      currentNumber = currentNumber * 10 + parseInt(char);
-    } else if (char === "[") {
-      // Push the current state to the stack
-      stack.push([currentString, currentNumber]);
-      // Reset current values
-      currentString = "";
+  for (i = 0; i < a.length; i++) {
+    if (!isNaN(a[i])) {
+      currentNumber = currentNumber * 10 + Number(a[i]);
+    } else if (a[i] === "[") {
+      stack.push(currentNumber);
+      stack.push(currentString);
       currentNumber = 0;
-    } else if (char === "]") {
-      // Pop from the stack
-      let [previousString, multiplier] = stack.pop();
-      // Repeat the current string and concatenate
-      currentString = previousString + currentString.repeat(multiplier);
-    } else {
-      // Add characters to the current string
-      currentString += char;
+      currentString = "";
+    } else if (/^[a-zA-Z]$/.test(a[i])) {
+      currentString += a[i];
+    } else if (a[i] == "]") {
+      let prevEle = stack.pop();
+      let prevNum = stack.pop();
+      currentString = prevEle + currentString.repeat(prevNum);
     }
   }
-
   return currentString;
 };
+
+console.log(decodeString("2[abc]3[cd]ef"));
