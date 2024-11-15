@@ -7,36 +7,38 @@
   </head>
   <body>
     <script>
-      // Define the RecentCounter class
-      var RecentCounter = function () {
-        this.requests = []; // Initialize an empty array to store request times
-      };
+      var predictPartyVictory = function (senate) {
+        const a = senate.split("");
+        const n = a.length;
+        const q1 = [];
+        const q2 = [];
 
-      /**
-       * @param {number} t
-       * @return {number}
-       */
-      RecentCounter.prototype.ping = function (t) {
-        // Add the new request time to the queue
-        this.requests.push(t);
-
-        // Remove any requests that are older than t - 3000 milliseconds
-        while (this.requests[0] < t - 3000) {
-          this.requests.shift(); // Remove the oldest request (at index 0)
+        for (i = 0; i < a.length; i++) {
+          if (a[i] == "R") {
+            q1.push(i);
+          } else {
+            q2.push(i);
+          }
         }
 
-        // Return the count of requests within the range [t - 3000, t]
-        return this.requests.length;
+        while (q1.length > 0 && q2.length > 0) {
+          if (q1[0] < q2[0]) {
+            q2.shift();
+            q1.push(q1[0] + n);
+            q1.shift();
+          } else if (q2[0] < q1[0] && q2.length == 1) {
+            q1.shift();
+            q2.push(q2[0] + n);
+            q2.shift();
+          } else if (q1[0] > q2[0]) {
+            q1.shift();
+            q2.push(q2[0] + n);
+            q2.shift();
+          }
+        }
+        return q1.length != 0 ? "Radiant" : "Dire";
       };
-
-      // Instantiate the RecentCounter object
-      var recentCounter = new RecentCounter();
-
-      // Call the ping method with example inputs
-      console.log(recentCounter.ping(1)); // Output: 1
-      console.log(recentCounter.ping(100)); // Output: 2
-      console.log(recentCounter.ping(3001)); // Output: 3
-      console.log(recentCounter.ping(3002)); // Output: 3
+      console.log(predictPartyVictory("DRD")); // Output: 3
     </script>
   </body>
 </html>
