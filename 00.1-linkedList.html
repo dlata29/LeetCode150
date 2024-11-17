@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Node {
+        constructor(value) {
+          this.value = value;
+          this.next = null;
+        }
+      }
+
+      class LinkedList {
+        constructor(head) {
+          this.head = null;
+          this.size = 0;
+        }
+
+        // Add a node at the end
+        append(value) {
+          const newNode = new Node(value);
+
+          // If the list is empty, make the new node the head
+          if (!this.head) {
+            this.head = newNode; // Set the head to the new node, not the value
+          } else {
+            let current = this.head;
+
+            // Traverse the list until the last node
+            while (current.next) {
+              current = current.next;
+            }
+
+            // Set the next of the last node to the new node
+            current.next = newNode;
+          }
+
+          this.size++;
+        }
+
+        prepend(value) {
+          const newNode = { value, next: this.head };
+          this.head = newNode;
+          this.size++;
+        }
+
+        getAllValues() {
+          const values = [];
+
+          let current = this.head;
+
+          while (current) {
+            values.push(current.value);
+            current = current.next;
+          }
+          return values;
+        }
+
+        print() {
+          let current = this.head;
+          let output = "";
+          while (current) {
+            output += current.value + " -> ";
+            current = current.next;
+          }
+          output += "null";
+
+          return output;
+        }
+
+        deleteAtStart() {
+          if (!this.head) {
+            console.log("The list is already empty.");
+            return;
+          }
+
+          // Move the head to the next node
+          this.head = this.head.next;
+          this.size--;
+        }
+
+        deleteAtEnd() {
+          let prev = this.head;
+          let nextVal = prev.next;
+          while (prev) {
+            if (nextVal.next == null) {
+              prev.next = null;
+              break;
+            } else {
+              prev = nextVal;
+              nextVal = nextVal.next;
+            }
+          }
+          this.size--;
+        }
+
+        deleteAtFirst() {
+          let curr = this.head;
+          this.head = curr.next;
+          this.size--;
+        }
+
+        deleteAtIndex(value) {
+          let prev = 0;
+          let count = 0;
+          let curr = this.head;
+          while (curr && count < value) {
+            prev = curr;
+            curr = curr.next;
+            count++;
+          }
+
+          if (curr) {
+            prev.next = curr.next;
+            this.size--;
+          }
+        }
+      }
+
+      const list = new LinkedList();
+      list.append(100);
+      list.append(200);
+      list.prepend(50);
+      console.log(list);
+      list.getAllValues();
+      console.log(list.getAllValues());
+      console.log(list.print());
+      // console.log(list.deleteAtStart());
+      // console.log(list.print());
+      list.append(300);
+      list.append(400);
+      list.append(500);
+      // console.log(list.deleteAtEnd());
+      console.log(list.print());
+      // console.log(list.deleteAtFirst());
+      console.log(list.print());
+      console.log("delet at index ", list.deleteAtIndex(2));
+      console.log(list.print());
+    </script>
+  </body>
+</html>
