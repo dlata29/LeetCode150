@@ -4,29 +4,29 @@ var predictPartyVictory = function (senate) {
   const q1 = [];
   const q2 = [];
 
-  for (i = 0; i < a.length; i++) {
-    if (a[i] == "R") {
+  // Fill the queues with initial indices
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] === "R") {
       q1.push(i);
     } else {
       q2.push(i);
     }
   }
 
+  // Simulate the rounds
   while (q1.length > 0 && q2.length > 0) {
-    if (q1[0] < q2[0]) {
-      q2.shift();
-      q1.push(q1[0] + n);
-      q1.shift();
-    } else if (q2[0] < q1[0] && q2.length == 1) {
-      q1.shift();
-      q2.push(q2[0] + n);
-      q2.shift();
-    } else if (q1[0] > q2[0]) {
-      q1.shift();
-      q2.push(q2[0] + n);
-      q2.shift();
+    let rIndex = q1.shift(); // Corrected from pop() to shift()
+    let dIndex = q2.shift(); // Corrected from pop() to shift()
+
+    // The senator with the smaller index bans the other
+    if (rIndex < dIndex) {
+      q1.push(rIndex + n);
+    } else {
+      q2.push(dIndex + n);
     }
   }
-  return q1.length != 0 ? "Radiant" : "Dire";
+
+  // Determine the winner
+  return q1.length > 0 ? "Radiant" : "Dire";
 };
 console.log(predictPartyVictory("DRD")); // Output: 3
