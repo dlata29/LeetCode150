@@ -103,6 +103,8 @@
           this.head = curr.next;
           this.size--;
         }
+
+        deleteAtIndex(value) {}
       }
 
       const list = new LinkedList();
@@ -122,6 +124,7 @@
       console.log(list.print());
       // console.log(list.deleteAtFirst());
       console.log(list.print());
+      console.log(list.deleteAtIndex(2));
     </script>
   </body>
 </html>
