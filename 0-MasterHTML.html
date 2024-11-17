@@ -8,10 +8,9 @@
   <body>
     <script>
       class Node {
-        constructor(value, index = null) {
+        constructor(value) {
           this.value = value;
           this.next = null;
-          this.index = index;
         }
       }
 
@@ -41,7 +40,6 @@
           }
 
           this.size++;
-          this.index == null ? (this.index = 0) : (this.index += 1);
         }
 
         prepend(value) {
@@ -107,7 +105,19 @@
         }
 
         deleteAtIndex(value) {
-          let index = value;
+          let prev = 0;
+          let count = 0;
+          let curr = this.head;
+          while (curr && count < value) {
+            prev = curr;
+            curr = curr.next;
+            count++;
+          }
+
+          if (curr) {
+            prev.next = curr.next;
+            this.size--;
+          }
         }
       }
 
@@ -128,7 +138,8 @@
       console.log(list.print());
       // console.log(list.deleteAtFirst());
       console.log(list.print());
-      console.log(list.deleteAtIndex(2));
+      console.log("delet at index ", list.deleteAtIndex(2));
+      console.log(list.print());
     </script>
   </body>
 </html>
