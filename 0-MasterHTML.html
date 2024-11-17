@@ -14,12 +14,59 @@
         }
       }
 
+      // LinkedList class to manage nodes
       class LinkedList {
-        constructor(head) {
+        constructor() {
           this.head = null;
           this.size = 0;
         }
+
+        // Add a node to the end of the list
+        append(value) {
+          const newNode = new Node(value);
+          if (!this.head) {
+            this.head = newNode;
+          } else {
+            let current = this.head;
+            while (current.next) {
+              current = current.next;
+            }
+            current.next = newNode;
+          }
+          this.size++;
+        }
+
+        // Utility function to print the entire list
+        printList() {
+          let current = this.head;
+          let result = "";
+          while (current) {
+            result += current.value + " -> ";
+            current = current.next;
+          }
+          console.log(result + "null");
+        }
       }
+
+      // Function to delete the middle node from the LinkedList
+      console.log("After Deleting the Middle Node:");
+
+      // Example usage
+      const linkedList = new LinkedList();
+      linkedList.append(1);
+      linkedList.append(2);
+      linkedList.append(3);
+      linkedList.append(4);
+      linkedList.append(5);
+      linkedList.append(6);
+      console.log("Original List:");
+      linkedList.printList();
+
+      // Call the deleteMiddle function
+      linkedList.head = deleteMiddle(linkedList.head);
+
+      console.log("After Deleting the Middle Node:");
+      linkedList.printList();
     </script>
   </body>
 </html>
