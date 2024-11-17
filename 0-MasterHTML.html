@@ -95,6 +95,13 @@
               nextVal = nextVal.next;
             }
           }
+          this.size--;
+        }
+
+        deleteAtFirst() {
+          let curr = this.head;
+          this.head = curr.next;
+          this.size--;
         }
       }
 
@@ -111,7 +118,9 @@
       list.append(300);
       list.append(400);
       list.append(500);
-      console.log(list.deleteAtEnd());
+      // console.log(list.deleteAtEnd());
+      console.log(list.print());
+      // console.log(list.deleteAtFirst());
       console.log(list.print());
     </script>
   </body>
