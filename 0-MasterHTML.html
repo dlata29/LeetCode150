@@ -48,8 +48,17 @@
         }
       }
 
-      // Function to delete the middle node from the LinkedList
-      console.log("After Deleting the Middle Node:");
+      var pairSum = function (head) {
+        let slow = head;
+        let fast = head.next.next;
+
+        while (fast) {
+          slow = slow.next;
+          fast = fast.next.next;
+        }
+
+        let middle = slow;
+      };
 
       // Example usage
       const linkedList = new LinkedList();
@@ -63,7 +72,7 @@
       linkedList.printList();
 
       // Call the deleteMiddle function
-      linkedList.head = deleteMiddle(linkedList.head);
+      linkedList.head = pairSum(linkedList.head);
 
       console.log("After Deleting the Middle Node:");
       linkedList.printList();
