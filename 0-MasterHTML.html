@@ -20,9 +20,18 @@
           this.root = null;
         }
 
-        insert(value) {}
+        insert(value) {
+          const newNode = new TreeNode(value);
+
+          if (!root) {
+            this.root = newNode;
+            return this;
+          }
+        }
       }
 
-     const bst=new BinarySearchTree();
+      const bst = new BinarySearchTree();
+      bst.insert(10);
+    </script>
   </body>
 </html>
