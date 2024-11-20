@@ -26,6 +26,14 @@
           if (!root) {
             this.root = newNode;
             return this;
+          } else {
+            this.root = current;
+
+            if (value < current.value) {
+              while (!current.left) {
+                this.left = value;
+              }
+            }
           }
         }
       }
