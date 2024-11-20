@@ -39,7 +39,7 @@
                 current = current.left;
               }
 
-              if (value > current) {
+              if (value > current.value) {
                 if (!current.right) {
                   current.right = newNode;
                   return this;
@@ -53,7 +53,7 @@
       }
 
       const bst = new BinarySearchTree();
-      bst.insert(10).insert(20);
+      bst.insert(10).insert(20).insert(5).insert(15).insert(7).insert(15);
       console.log(bst);
     </script>
   </body>
