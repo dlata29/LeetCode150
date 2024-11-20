@@ -27,11 +27,25 @@
             this.root = newNode;
             return this;
           } else {
-            this.root = current;
+            let current = this.root;
+            while (true) {
+              if (value === current.value) return undefined; // Prevent duplicate values
+              if (value < current.value) {
+                // Move to the left
+                if (!current.left) {
+                  current.left = newNode;
+                  return this;
+                }
+                current = current.left;
+              }
 
-            if (value < current.value) {
-              while (!current.left) {
-                this.left = value;
+              if (value > current) {
+                if (!current.right) {
+                  current.right = newNode;
+                  return this;
+                }
+
+                current = current.right;
               }
             }
           }
