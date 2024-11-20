@@ -23,7 +23,7 @@
         insert(value) {
           const newNode = new TreeNode(value);
 
-          if (!root) {
+          if (!this.root) {
             this.root = newNode;
             return this;
           } else {
