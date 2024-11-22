@@ -15,13 +15,52 @@
         }
       }
 
-      class BinarySearchTree {
+      class TreeNode {
         constructor() {
           this.root = null;
         }
+
+        insert(value) {
+          const newNode = new Node(value);
+
+          if (!this.root) {
+            this.root = newNode;
+            return this;
+          } else {
+            let current = this.root;
+            while (true) {
+              if (value === current.value) return undefined; // Prevent duplicate values
+              if (value < current.value) {
+                // Move to the left
+                if (!current.left) {
+                  current.left = newNode;
+                  return this;
+                }
+                current = current.left;
+              }
+
+              if (value > current.value) {
+                if (!current.right) {
+                  current.right = newNode;
+                  return this;
+                }
+
+                current = current.right;
+              }
+            }
+          }
+        }
       }
 
-      var maxDepth = function (root) {};
+      var maxDepth = function (root) {
+        if (!root) {
+          return 0; // Base case: if the node is null, the depth is 0
+        }
+        let left = maxDepth(root.left);
+        let right = maxDepth(root.right);
+
+        return Math.max(left, right) + 1;
+      };
 
       const root = new TreeNode(3);
       root.left = new TreeNode(9);
