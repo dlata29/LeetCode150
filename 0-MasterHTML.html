@@ -7,7 +7,7 @@
   </head>
   <body>
     <script>
-      class TreeNode {
+      class Node {
         constructor(value) {
           this.value = value;
           this.left = null;
@@ -19,42 +19,17 @@
         constructor() {
           this.root = null;
         }
-
-        insert(value) {
-          const newNode = new TreeNode(value);
-
-          if (!this.root) {
-            this.root = newNode;
-            return this;
-          } else {
-            let current = this.root;
-            while (true) {
-              if (value === current.value) return undefined; // Prevent duplicate values
-              if (value < current.value) {
-                // Move to the left
-                if (!current.left) {
-                  current.left = newNode;
-                  return this;
-                }
-                current = current.left;
-              }
-
-              if (value > current.value) {
-                if (!current.right) {
-                  current.right = newNode;
-                  return this;
-                }
-
-                current = current.right;
-              }
-            }
-          }
-        }
       }
 
-      const bst = new BinarySearchTree();
-      bst.insert(10).insert(20).insert(5).insert(15).insert(7).insert(15);
-      console.log(bst);
+      var maxDepth = function (root) {};
+
+      const root = new TreeNode(3);
+      root.left = new TreeNode(9);
+      root.right = new TreeNode(20);
+      root.right.left = new TreeNode(15);
+      root.right.right = new TreeNode(7);
+
+      console.log(maxDepth(root)); // Output: 3
     </script>
   </body>
 </html>
