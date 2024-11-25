@@ -16,28 +16,62 @@
         }
       }
 
-      // Function to calculate the maximum depth of a binary tree
-      var maxDepth = function (root) {
-        if (!root) {
-          return 0; // Base case: empty tree has depth 0
+      // Helper function to construct a binary tree from an array
+      function buildTreeFromArray(arr) {
+        if (!arr.length) return null;
+
+        const root = new TreeNode(arr[0]); // Create root from the first element
+        const queue = [root]; // Queue for level-order traversal
+        let i = 1;
+
+        while (i < arr.length) {
+          const current = queue.shift();
+
+          // Assign left child
+          if (arr[i] !== null) {
+            current.left = new TreeNode(arr[i]);
+            queue.push(current.left);
+          }
+          i++;
+
+          // Assign right child
+          if (i < arr.length && arr[i] !== null) {
+            current.right = new TreeNode(arr[i]);
+            queue.push(current.right);
+          }
+          i++;
         }
 
-        // Recursively calculate depth of left and right subtrees
-        let leftDepth = maxDepth(root.left);
-        let rightDepth = maxDepth(root.right);
+        return root;
+      }
 
-        // Maximum depth is the greater of the two, plus the current node
-        return Math.max(leftDepth, rightDepth) + 1;
-      };
+      // Input arrays for the two trees
+      const root1Array = [3, 5, 1, 6, 2, 9, 8, null, null, 7, 4];
+      const root2Array = [
+        3,
+        5,
+        1,
+        6,
+        7,
+        4,
+        2,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        9,
+        8,
+      ];
 
-      // Example Usage
-      const root = new TreeNode(3);
-      root.left = new TreeNode(9);
-      root.right = new TreeNode(20);
-      root.right.left = new TreeNode(15);
-      root.right.right = new TreeNode(7);
+      // Create the trees
+      const root1 = buildTreeFromArray(root1Array);
+      const root2 = buildTreeFromArray(root2Array);
 
-      console.log(maxDepth(root));
+      // Testing the created trees
+      console.log(printTree(root1)); // Should output [3, 5, 1, 6, 2, 9, 8, null, null, 7, 4]
+      console.log(printTree(root2)); // Should output [3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8]
     </script>
   </body>
 </html>
