@@ -56,11 +56,10 @@
         if (!root) return;
         if (root.left == null && root.right == null) {
           leaf.push(root.val);
-          return;
-        } else {
-          getLeaves(root.left, leaf);
-          getLeaves(root.right, leaf);
         }
+
+        getLeaves(root.left, leaf);
+        getLeaves(root.right, leaf);
 
         return leaf;
       }
