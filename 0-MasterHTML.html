@@ -54,15 +54,36 @@
       // Helper function to get leaf nodes
       function getLeaves(root, leaves = []) {
         if (!root) return;
-        if (root.left || root.right) {
+        if (root.left) {
           getLeaves(root.left, leaves);
         }
+
+        if (root.right) {
+          getLeaves(root.right, leaves);
+        }
         leaves.push(root.value);
+        return leaves;
       }
 
       // Input values
-      const root1Values = [3, 5, 1, 6, 2, 9, 8, 7, 4];
-      const root2Values = [3, 5, 1, 6, 7, 4, 2, 9, 8];
+      const root1Values = [3, 5, 1, 6, 2, 9, 8, null, null, 7, 4];
+      const root2Values = [
+        3,
+        5,
+        1,
+        6,
+        7,
+        4,
+        2,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        9,
+        8,
+      ];
 
       // Helper function to construct a BST
       function constructBST(values) {
