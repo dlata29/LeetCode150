@@ -8,70 +8,85 @@
   <body>
     <script>
       // Definition for a binary tree node
+      // TreeNode definition
       class TreeNode {
-        constructor(value = 0, left = null, right = null) {
+        constructor(value) {
           this.value = value;
-          this.left = left;
-          this.right = right;
+          this.left = null;
+          this.right = null;
         }
       }
 
-      // Helper function to construct a binary tree from an array
-      function buildTreeFromArray(arr) {
-        if (!arr.length) return null;
-
-        const root = new TreeNode(arr[0]); // Create root from the first element
-        const queue = [root]; // Queue for level-order traversal
-        let i = 1;
-
-        while (i < arr.length) {
-          const current = queue.shift();
-
-          // Assign left child
-          if (arr[i] !== null) {
-            current.left = new TreeNode(arr[i]);
-            queue.push(current.left);
-          }
-          i++;
-
-          // Assign right child
-          if (i < arr.length && arr[i] !== null) {
-            current.right = new TreeNode(arr[i]);
-            queue.push(current.right);
-          }
-          i++;
+      // BinarySearchTree definition
+      class BinarySearchTree {
+        constructor() {
+          this.root = null;
         }
 
-        return root;
+        insert(value) {
+          const newNode = new TreeNode(value);
+
+          if (!this.root) {
+            this.root = newNode;
+            return this;
+          } else {
+            let current = this.root;
+            while (true) {
+              if (value === current.value) return undefined; // Prevent duplicate values
+              if (value < current.value) {
+                if (!current.left) {
+                  current.left = newNode;
+                  return this;
+                }
+                current = current.left;
+              } else if (value > current.value) {
+                if (!current.right) {
+                  current.right = newNode;
+                  return this;
+                }
+                current = current.right;
+              }
+            }
+          }
+        }
       }
 
-      // Input arrays for the two trees
-      const root1Array = [3, 5, 1, 6, 2, 9, 8, null, null, 7, 4];
-      const root2Array = [
-        3,
-        5,
-        1,
-        6,
-        7,
-        4,
-        2,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        9,
-        8,
-      ];
+      // Helper function to get leaf nodes
+      function getLeaves(root, leaves = []) {
+        if (!root) return;
+        if (root.left || root.right) {
+          getLeaves(root.left, leaves);
+        }
+        leaves.push(root.value);
+      }
 
-      // Create the trees
-      const root1 = buildTreeFromArray(root1Array);
-      const root2 = buildTreeFromArray(root2Array);
+      // Input values
+      const root1Values = [3, 5, 1, 6, 2, 9, 8, 7, 4];
+      const root2Values = [3, 5, 1, 6, 7, 4, 2, 9, 8];
 
-      // Testing the created trees
-      console.log(printTree(root1)); // Should output [3, 5, 1, 6, 2, 9, 8, null, null, 7, 4]
-      console.log(printTree(root2)); // Should output [3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8]
+      // Helper function to construct a BST
+      function constructBST(values) {
+        const bst = new BinarySearchTree();
+        for (const value of values) {
+          if (value !== null) {
+            bst.insert(value);
+          }
+        }
+        return bst.root;
+      }
+
+      // Construct the trees
+      const root1 = constructBST(root1Values);
+      const root2 = constructBST(root2Values);
+
+      // Call the function to check leaf similarity
+      var leafSimilar = function (root1, root2) {
+        const leaves1 = getLeaves(root1); // Get leaves of the first tree
+        const leaves2 = getLeaves(root2); // Get leaves of the second tree
+        return JSON.stringify(leaves1) === JSON.stringify(leaves2); // Compare the leaf sequences
+      };
+
+      console.log("Are the trees leaf-similar?", leafSimilar(root1, root2)); // Output: true/false
     </script>
   </body>
 </html>
