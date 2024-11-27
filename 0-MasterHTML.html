@@ -54,15 +54,17 @@
       // Helper function to get leaf nodes
       function getLeaves(root, leaf = []) {
         if (!root) return;
-        if (root.left == null && root.right == null) {
-          leaf.push(root.val);
+
+        if (root.left === null && root.right === null) {
+          leaf.push(root.val); // Add leaf node value
           return;
         }
 
+        // Recursive calls for left and right subtrees
         getLeaves(root.left, leaf);
         getLeaves(root.right, leaf);
 
-        return leaf;
+        return leaf; // Return the collected leaves
       }
 
       // Input values
