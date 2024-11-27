@@ -83,11 +83,10 @@
       var leafSimilar = function (root1, root2) {
         const leaves1 = getLeaves(root1); // Get leaves of the first tree
         const leaves2 = getLeaves(root2); // Get leaves of the second tree
+        console.log(leaves1);
+        console.log(leaves2);
         return JSON.stringify(leaves1) === JSON.stringify(leaves2); // Compare the leaf sequences
       };
-
-      console.log(leaves1);
-      console.log(leaves2);
 
       console.log("Are the trees leaf-similar?", leafSimilar(root1, root2)); // Output: true/false
     </script>
