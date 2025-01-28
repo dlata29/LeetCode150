@@ -9,19 +9,18 @@
     <div id="text"></div>
     <script>
       var merge = function (nums1, m, nums2, n) {
-        const a = nums1.slice(0, m + 1);
-        const b = nums2.slice(0, n + 1);
+        const a = nums1.splice(0, m);
 
-        return [a] + [b];
+        return [...a, ...nums2].sort();
       };
 
       document.querySelector("#text").innerHTML = merge(
         [1, 2, 3, 0, 0, 0],
-        2,
+        3,
         [2, 5, 6],
         3
       );
-      console.log(merge([1, 2, 3, 0, 0, 0], 2, [2, 5, 6], 3));
+      console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));
     </script>
   </body>
 </html>
