@@ -6,8 +6,22 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="text"></div>
     <script>
-      a;
+      var merge = function (nums1, m, nums2, n) {
+        const a = nums1.slice(0, m + 1);
+        const b = nums2.slice(0, n + 1);
+
+        return [a] + [b];
+      };
+
+      document.querySelector("#text").innerHTML = merge(
+        [1, 2, 3, 0, 0, 0],
+        2,
+        [2, 5, 6],
+        3
+      );
+      console.log(merge([1, 2, 3, 0, 0, 0], 2, [2, 5, 6], 3));
     </script>
   </body>
 </html>
