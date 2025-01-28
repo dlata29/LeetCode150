@@ -9,9 +9,11 @@
     <div id="text"></div>
     <script>
       var merge = function (nums1, m, nums2, n) {
-        const a = nums1.splice(0, m);
+        const a = nums1.slice(0, m);
 
-        return [...a, ...nums2].sort();
+        nums1.splice(0, m + n); // Remove the trailing zeroes from nums1 to make space
+        nums1.push(...a, ...nums2);
+        nums1.sort((a, b) => a - b);
       };
 
       document.querySelector("#text").innerHTML = merge(
