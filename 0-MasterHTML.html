@@ -8,18 +8,16 @@
   <body>
     <div id="text"></div>
     <script>
-      var merge = function (nums, val) {
-        let k = 0; // Pointer for elements not equal to `val`
-        for (let i = 0; i < nums.length; i++) {
-          if (nums[i] !== val) {
-            nums[k] = nums[i]; // Move the non-val element to the front
-            k++; // Increment the counter for non-val elements
-          }
-        }
-        return k; // The number of elements not equal to val
-      };
-      document.querySelector("#text").innerHTML = merge([3, 2, 2, 3], 3);
-      console.log(merge([0, 1, 2, 2, 3, 0, 4, 2], 2));
+      function merge(arr) {
+        arr = arr.sort((a, b) => a - b);
+        let min = 0;
+        let max = 0;
+        min = arr.slice(0, 4).reduce((a, i) => a + i, 0);
+        max = arr.slice(arr.length - 4, arr.length).reduce((a, i) => a + i, 0);
+        return [min, max];
+      }
+      document.querySelector("#text").innerHTML = merge([1, 3, 5, 7, 9]);
+      console.log(merge([1, 3, 5, 7, 9]));
     </script>
   </body>
 </html>
